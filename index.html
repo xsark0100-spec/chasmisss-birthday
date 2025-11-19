@@ -43,6 +43,50 @@
             50% { opacity: 1; }
         }
 
+        /* METEOR ANIMATION */
+        .meteor-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .meteor {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, #ffff00, #ff8800, #ff0000);
+            border-radius: 50%;
+            box-shadow: 0 0 20px #ff8800, 0 0 40px #ff4400;
+            animation: meteorFall linear forwards;
+        }
+
+        .meteor::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background: linear-gradient(to bottom, rgba(255, 136, 0, 0.6), transparent);
+            border-radius: 50%;
+            filter: blur(2px);
+        }
+
+        @keyframes meteorFall {
+            0% {
+                transform: translateY(0) translateX(0) rotate(45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) translateX(100px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
         /* Floating Particles */
         .particle {
             position: absolute;
@@ -385,6 +429,9 @@
     <!-- Stars Background -->
     <div class="stars" id="starfield"></div>
 
+    <!-- Meteors Container -->
+    <div class="meteor-container" id="meteorContainer"></div>
+
     <!-- Main Container -->
     <div class="container">
         <!-- Header -->
@@ -503,6 +550,32 @@
             }
         }
 
+        // Generate falling meteors
+        function generateMeteors() {
+            const meteorContainer = document.getElementById('meteorContainer');
+            
+            setInterval(() => {
+                const meteor = document.createElement('div');
+                meteor.className = 'meteor';
+                
+                // Random starting position
+                const startX = Math.random() * window.innerWidth;
+                const startY = -50;
+                
+                meteor.style.left = startX + 'px';
+                meteor.style.top = startY + 'px';
+                
+                // Random duration between 2-4 seconds
+                const duration = 2 + Math.random() * 2;
+                meteor.style.animationDuration = duration + 's';
+                
+                meteorContainer.appendChild(meteor);
+                
+                // Remove meteor after animation completes
+                setTimeout(() => meteor.remove(), duration * 1000);
+            }, 300); // Create a meteor every 300ms
+        }
+
         // Generate floating particles
         function generateParticles() {
             const body = document.body;
@@ -515,7 +588,7 @@
                 body.appendChild(particle);
 
                 setTimeout(() => particle.remove(), 6000);
-            }, 500);
+            }, 800);
         }
 
         // Countdown Timer
@@ -592,6 +665,7 @@
         // Initialize
         window.addEventListener('load', () => {
             generateStars();
+            generateMeteors();  // NEW: Generate meteors!
             generateParticles();
             updateCountdown();
         });
