@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 Chasmisss's Birthday Celebration! 🎉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 25%, #2d0a4e 50%, #1a1a3e 75%, #0a0e27 100%);
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Stars Background */
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Floating Particles */
+        .particle {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .particle-star {
+            width: 3px;
+            height: 3px;
+            background: #00ffff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ffff;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); opacity: 1; }
+            50% { transform: translateY(-20px); opacity: 0.5; }
+        }
+
+        /* Main Content */
+        .container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: slideDown 1s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1 {
+            font-size: 4em;
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+            text-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+            margin-bottom: 10px;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .header p {
+            font-size: 1.5em;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        /* Countdown Timer */
+        .countdown-section {
+            background: rgba(255, 0, 255, 0.1);
+            border: 2px solid #00ffff;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(255, 0, 255, 0.1);
+            max-width: 600px;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 30px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(255, 0, 255, 0.1); }
+            50% { box-shadow: 0 0 50px rgba(0, 255, 255, 0.6), inset 0 0 30px rgba(255, 0, 255, 0.2); }
+        }
+
+        .countdown-title {
+            color: #ffff00;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ffff00;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: space-around;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 20px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .countdown-item .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+
+        .countdown-item .label {
+            color: #00ffff;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        /* Personal Message */
+        .message-section {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #ff00ff;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            max-width: 700px;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
+            animation: slideIn 1s ease-out 0.5s backwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .message-section h2 {
+            color: #00ffff;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        .message-section p {
+            color: #ffffff;
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        /* Photo Gallery */
+        .gallery-section {
+            margin: 40px 0;
+            max-width: 900px;
+            animation: slideIn 1s ease-out 1s backwards;
+        }
+
+        .gallery-section h2 {
+            color: #ffff00;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+            text-shadow: 0 0 10px #ffff00;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .gallery-item {
+            background: rgba(255, 0, 255, 0.2);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 200px;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(0, 255, 255, 0.2));
+            font-size: 3em;
+        }
+
+        /* Birthday Wishes Section */
+        .wishes-section {
+            background: rgba(255, 0, 255, 0.1);
+            border: 2px solid #ffff00;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            max-width: 700px;
+            box-shadow: 0 0 30px rgba(255, 255, 0, 0.3);
+            animation: slideIn 1s ease-out 1.5s backwards;
+        }
+
+        .wishes-section h2 {
+            color: #ffff00;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            text-shadow: 0 0 10px #ffff00;
+        }
+
+        .wish {
+            background: rgba(0, 255, 255, 0.1);
+            border-left: 4px solid #ff00ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            color: #ffffff;
+        }
+
+        .wish-author {
+            color: #00ffff;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* Confetti Animation */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        /* Emoji Animation */
+        .emoji-float {
+            position: fixed;
+            font-size: 2em;
+            animation: emojiFloat 4s ease-in;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        @keyframes emojiFloat {
+            0% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) translateX(30px) scale(0.5);
+            }
+        }
+
+        /* Button Styles */
+        .button {
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 20px 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
+        }
+
+        .button:active {
+            transform: scale(0.95);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+
+            .header p {
+                font-size: 1.2em;
+            }
+
+            .countdown-section {
+                max-width: 90%;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: #00ffff;
+            margin-top: 60px;
+            font-size: 0.9em;
+            text-shadow: 0 0 10px #00ffff;
+            animation: slideIn 1s ease-out 2s backwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Stars Background -->
+    <div class="stars" id="starfield"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎉 CHASMISSS 🎉</h1>
+            <p>✨ It's Your Special Day! ✨</p>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="countdown-section">
+            <div class="countdown-title">⏰ Time Until Your Birthday! ⏰</div>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="number" id="days">0</div>
+                    <div class="label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="number" id="hours">0</div>
+                    <div class="label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="number" id="minutes">0</div>
+                    <div class="label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="number" id="seconds">0</div>
+                    <div class="label">Seconds</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personal Message -->
+        <div class="message-section">
+            <h2>💖 A Message For You 💖</h2>
+            <p>Dear Chasmisss,
+
+                <br><br>
+                On this special day, I want to remind you of how wonderful you are! Your kindness, laughter, and love mean the world to me, even though the distance separates us. 
+                <br><br>
+                Though I can't be there to celebrate with you in person, please know that you're in my heart every single moment. I wish I could be there to share cake, laughter, and memories with you!
+                <br><br>
+                May your birthday be filled with joy, love, and all the happiness you deserve. Here's to another year of amazing adventures, dreams coming true, and being the incredible person that you are!
+                <br><br>
+                Happy Birthday, Chasmisss! 🎂✨💝
+                <br><br>
+                With all my love,
+                <br>
+                Your Loving Sibling 💕
+            </p>
+            <button class="button" onclick="sendWish()">💌 Send a Birthday Hug 💌</button>
+        </div>
+
+        <!-- Photo Gallery -->
+        <div class="gallery-section">
+            <h2>📸 Beautiful Memories 📸</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">📷</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">🎂</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">🎈</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">🎉</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">💝</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">⭐</div>
+                </div>
+            </div>
+            <p style="text-align: center; color: #00ffff; margin-top: 20px; text-shadow: 0 0 10px #00ffff;">
+                💫 Click on any box to add your favorite photos! 💫
+            </p>
+        </div>
+
+        <!-- Birthday Wishes -->
+        <div class="wishes-section">
+            <h2>🌟 Birthday Wishes 🌟</h2>
+            <div class="wish">
+                <div class="wish-author">💕 From Your Sibling:</div>
+                Chasmisss, you are the brightest star in the sky! Wishing you a year filled with endless joy, beautiful moments, and dreams coming true. You deserve all the happiness in the world! 🎂✨
+            </div>
+            <div class="wish">
+                <div class="wish-author">🎉 Special Birthday Message:</div>
+                May your day be as magical and special as you are! Celebrate yourself, have fun, and know that you are loved and appreciated more than words can express! 💖
+            </div>
+            <div class="wish">
+                <div class="wish-author">🌈 A Heartfelt Wish:</div>
+                Even though distance keeps us apart, our bond is unbreakable! Wishing you the most wonderful birthday ever, filled with laughter, love, and all your favorite things! 🌟
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>✨ Made with love and magic for your special day ✨</p>
+            <p>🎊 Happy Birthday, Chasmisss! 🎊</p>
+        </div>
+    </div>
+
+    <script>
+        // Generate random stars
+        function generateStars() {
+            const starfield = document.getElementById('starfield');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starfield.appendChild(star);
+            }
+        }
+
+        // Generate floating particles
+        function generateParticles() {
+            const body = document.body;
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.className = 'particle particle-star';
+                particle.style.left = Math.random() * window.innerWidth + 'px';
+                particle.style.top = window.innerHeight + 'px';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                body.appendChild(particle);
+
+                setTimeout(() => particle.remove(), 6000);
+            }, 500);
+        }
+
+        // Countdown Timer
+        function updateCountdown() {
+            const targetDate = new Date('2025-11-24T00:00:00').getTime();
+            
+            const timer = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours;
+                document.getElementById('minutes').textContent = minutes;
+                document.getElementById('seconds').textContent = seconds;
+
+                if (distance < 0) {
+                    clearInterval(timer);
+                    document.querySelector('.countdown-title').textContent = '🎉 Happy Birthday Chasmisss! 🎉';
+                    createConfetti();
+                }
+            }, 1000);
+        }
+
+        // Create confetti
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = '-10px';
+                    confetti.style.background = ['#ff00ff', '#00ffff', '#ffff00'][Math.floor(Math.random() * 3)];
+                    confetti.style.animation = `fall ${2 + Math.random() * 2}s linear`;
+                    document.body.appendChild(confetti);
+
+                    setTimeout(() => confetti.remove(), 5000);
+                }, i * 30);
+            }
+        }
+
+        // Send wish function
+        function sendWish() {
+            const emojis = ['🎉', '💖', '✨', '🎂', '🎈', '🌟', '💝'];
+            for (let i = 0; i < 20; i++) {
+                const emoji = document.createElement('div');
+                emoji.className = 'emoji-float';
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.left = Math.random() * window.innerWidth + 'px';
+                emoji.style.top = window.innerHeight / 2 + 'px';
+                document.body.appendChild(emoji);
+
+                setTimeout(() => emoji.remove(), 4000);
+            }
+            alert('💌 Your birthday hug has been sent to Chasmisss! 💌\n\n🎉 May her day be absolutely magical! 🎉');
+        }
+
+        // CSS for falling confetti
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                to {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        window.addEventListener('load', () => {
+            generateStars();
+            generateParticles();
+            updateCountdown();
+        });
+    </script>
+</body>
+</html>
