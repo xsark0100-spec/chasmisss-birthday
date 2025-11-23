@@ -79,12 +79,12 @@
     <div class="meteor-container" id="meteorContainer"></div>
 
     <div class="container">
-        <div class="header">
+        <div class="header" id="headerSection">
             <h1>🎉 CHASMISSS 🎉</h1>
             <p>✨ It's Your Special Day! ✨</p>
         </div>
 
-        <div class="countdown-section">
+        <div class="countdown-section" id="countdownSection">
             <div class="countdown-title">⏰ Time Until Your Birthday! ⏰</div>
             <div class="countdown">
                 <div class="countdown-item"><div class="number" id="days">0</div><div class="label">Days</div></div>
@@ -94,33 +94,36 @@
             </div>
         </div>
 
-        <div class="message-section">
-            <h2>💖 A Message For You 💖</h2>
-            <p id="personalMessage">Dear Chasmisss,<br><br>On this special day, I want to remind you of how wonderful you are! Your kindness, laughter, and love mean the world to me, even though the distance separates us.<br><br>Though I can't be there to celebrate with you in person, please know that you're in my heart every single moment. I wish I could be there to share cake, laughter, and memories with you!<br><br>Happy Birthday, Chasmisss! 🎂✨💝<br><br>With all my love,<br>Your Loving Sibling 💕</p>
-            <button class="button" onclick="sendWish()">💌 Send a Birthday Hug 💌</button>
-        </div>
-
-        <div class="gallery-section">
-            <h2>📸 Beautiful Memories 📸</h2>
-            <div class="gallery" id="gallery">
-                <div class="gallery-item" data-index="0"><div class="gallery-placeholder">📷</div></div>
-                <div class="gallery-item" data-index="1"><div class="gallery-placeholder">🎂</div></div>
-                <div class="gallery-item" data-index="2"><div class="gallery-placeholder">🎈</div></div>
-                <div class="gallery-item" data-index="3"><div class="gallery-placeholder">🎉</div></div>
-                <div class="gallery-item" data-index="4"><div class="gallery-placeholder">💝</div></div>
-                <div class="gallery-item" data-index="5"><div class="gallery-placeholder">⭐</div></div>
+        <!-- Extra content hidden until after midnight Nov 24 local time -->
+        <div id="extraContent" style="display:none; width:100%">
+            <div class="message-section" id="messageSection">
+                <h2>💖 A Message For You 💖</h2>
+                <p id="personalMessage">Dear Chasmisss,<br><br>On this special day, I want to remind you of how wonderful you are! Your kindness, laughter, and love mean the world to me, even though the distance separates us.<br><br>Though I can't be there to celebrate with you in person, please know that you're in my heart every single moment. I wish I could be there to share cake, laughter, and memories with you!<br><br>Happy Birthday, Chasmisss! 🎂✨💝<br><br>With all my love,<br>Your Loving Sibling 💕</p>
+                <button class="button" onclick="sendWish()">💌 Send a Birthday Hug 💌</button>
             </div>
-            <p style="text-align:center; color:#00ffff; margin-top:14px;">💫 Click any box to add photos from your device (only for this visit). 💫</p>
-        </div>
 
-        <div class="wishes-section">
-            <h2>🌟 Birthday Wishes 🌟</h2>
-            <div class="wish"><div class="wish-author">💕 From Your Sibling:</div> Chasmisss, you are the brightest star in the sky! Wishing you a year filled with endless joy.</div>
-            <div class="wish"><div class="wish-author">🎉 Special Birthday Message:</div> May your day be as magical and special as you are! 💖</div>
-            <div class="wish"><div class="wish-author">🌈 A Heartfelt Wish:</div> Even though distance keeps us apart, our bond is unbreakable! 🌟</div>
-        </div>
+            <div class="gallery-section">
+                <h2>📸 Beautiful Memories 📸</h2>
+                <div class="gallery" id="gallery">
+                    <div class="gallery-item" data-index="0"><div class="gallery-placeholder">📷</div></div>
+                    <div class="gallery-item" data-index="1"><div class="gallery-placeholder">🎂</div></div>
+                    <div class="gallery-item" data-index="2"><div class="gallery-placeholder">🎈</div></div>
+                    <div class="gallery-item" data-index="3"><div class="gallery-placeholder">🎉</div></div>
+                    <div class="gallery-item" data-index="4"><div class="gallery-placeholder">💝</div></div>
+                    <div class="gallery-item" data-index="5"><div class="gallery-placeholder">⭐</div></div>
+                </div>
+                <p style="text-align:center; color:#00ffff; margin-top:14px;">💫 Click any box to add photos from your device (only for this visit). 💫</p>
+            </div>
 
-        <div class="footer"><p>✨ Made with love and magic for your special day ✨</p></div>
+            <div class="wishes-section">
+                <h2>🌟 Birthday Wishes 🌟</h2>
+                <div class="wish"><div class="wish-author">💕 From Your Sibling:</div> Chasmisss, you are the brightest star in the sky! Wishing you a year filled with endless joy.</div>
+                <div class="wish"><div class="wish-author">🎉 Special Birthday Message:</div> May your day be as magical and special as you are! 💖</div>
+                <div class="wish"><div class="wish-author">🌈 A Heartfelt Wish:</div> Even though distance keeps us apart, our bond is unbreakable! 🌟</div>
+            </div>
+
+            <div class="footer"><p>✨ Made with love and magic for your special day ✨</p></div>
+        </div>
     </div>
 
     <!-- Hidden audio element -->
@@ -136,8 +139,13 @@
         // particles
         function generateParticles(){ setInterval(()=>{ const p=document.createElement('div'); p.className='particle particle-star'; p.style.left=Math.random()*window.innerWidth+'px'; p.style.top=window.innerHeight+'px'; document.body.appendChild(p); setTimeout(()=>p.remove(),6000); },900); }
 
-        // countdown
-        function updateCountdown(){ const targetDate=new Date('2025-11-24T00:00:00').getTime(); const timer=setInterval(()=>{ const now=new Date().getTime(); const distance=targetDate-now; const days=Math.max(0,Math.floor(distance/(1000*60*60*24))); const hours=Math.max(0,Math.floor((distance%(1000*60*60*24))/(1000*60*60))); const minutes=Math.max(0,Math.floor((distance%(1000*60*60))/(1000*60))); const seconds=Math.max(0,Math.floor((distance%(1000*60))/1000)); document.getElementById('days').textContent=days; document.getElementById('hours').textContent=hours; document.getElementById('minutes').textContent=minutes; document.getElementById('seconds').textContent=seconds; if(distance<0){ clearInterval(timer); document.querySelector('.countdown-title').textContent='🎉 Happy Birthday Chasmisss! 🎉'; createConfetti(); } },1000); }
+        // countdown and show/hide extra content
+        function updateCountdown(){ const targetDate=new Date('2025-11-24T00:00:00').getTime(); const extra=document.getElementById('extraContent'); const title=document.querySelector('.countdown-title'); function tick(){ const now=Date.now(); const distance=targetDate-now; const days=Math.max(0,Math.floor(distance/(1000*60*60*24))); const hours=Math.max(0,Math.floor((distance%(1000*60*60*24))/(1000*60*60))); const minutes=Math.max(0,Math.floor((distance%(1000*60*60))/(1000*60))); const seconds=Math.max(0,Math.floor((distance%(1000*60))/1000)); document.getElementById('days').textContent=days; document.getElementById('hours').textContent=hours; document.getElementById('minutes').textContent=minutes; document.getElementById('seconds').textContent=seconds; if(distance<=0){ // show everything after midnight
+                    extra.style.display='block'; title.textContent='🎉 Happy Birthday Chasmisss! 🎉'; createConfetti(); clearInterval(timer);
+                } else {
+                    extra.style.display='none'; title.textContent='⏰ Time Until Your Birthday! ⏰';
+                } }
+            tick(); const timer=setInterval(tick,1000); }
 
         // confetti
         function createConfetti(){ for(let i=0;i<50;i++){ setTimeout(()=>{ const c=document.createElement('div'); c.className='confetti'; c.style.left=Math.random()*100+'vw'; c.style.top='-10px'; c.style.background=['#ff00ff','#00ffff','#ffff00'][Math.floor(Math.random()*3)]; c.style.width='10px'; c.style.height='10px'; c.style.position='fixed'; c.style.zIndex=60; c.style.pointerEvents='none'; c.style.animation=`fall ${2+Math.random()*2}s linear`; document.body.appendChild(c); setTimeout(()=>c.remove(),5000); }, i*25); } }
@@ -153,9 +161,7 @@
             document.body.style.backgroundBlendMode='overlay'; }); }
 
         // music upload + toggle
-        function setupMusicControls(){ const musicInput=document.getElementById('musicUpload'); const audio=document.getElementById('birthdayMusic'); const btn=document.getElementById('toggleMusicBtn'); let isPlaying=false; musicInput.addEventListener('change', ()=>{ const file=musicInput.files[0]; if(!file) return; const url=URL.createObjectURL(file); audio.src=url; audio.load(); audio.play().then(()=>{ isPlaying=true; btn.textContent='🔊 Pause'; }).catch(()=>{ isPlaying=false; btn.textContent='🔊 Play'; }); }); btn.addEventListener('click', ()=>{ if(!audio.src){ // load a default gentle track if user hasn't uploaded one
-                audio.src='https://cdn.pixabay.com/download/audio/2022/03/16/audio_c8b1e9a6f0.mp3?filename=birthday-party-52873.mp3'; audio.load(); }
-            if(audio.paused){ audio.play(); btn.textContent='🔊 Pause'; } else { audio.pause(); btn.textContent='🔈 Play'; } }); }
+        function setupMusicControls(){ const musicInput=document.getElementById('musicUpload'); const audio=document.getElementById('birthdayMusic'); const btn=document.getElementById('toggleMusicBtn'); musicInput.addEventListener('change', ()=>{ const file=musicInput.files[0]; if(!file) return; const url=URL.createObjectURL(file); audio.src=url; audio.load(); audio.play().then(()=>{ btn.textContent='🔊 Pause'; }).catch(()=>{ btn.textContent='🔊 Play'; }); }); btn.addEventListener('click', ()=>{ if(!audio.src){ audio.src='https://cdn.pixabay.com/download/audio/2022/03/16/audio_c8b1e9a6f0.mp3?filename=birthday-party-52873.mp3'; audio.load(); } if(audio.paused){ audio.play(); btn.textContent='🔊 Pause'; } else { audio.pause(); btn.textContent='🔈 Play'; } }); }
 
         // allow drag & drop background image onto page
         function setupDragDropBg(){ window.addEventListener('dragover', (e)=>e.preventDefault()); window.addEventListener('drop', (e)=>{ e.preventDefault(); const f=e.dataTransfer.files[0]; if(!f) return; if(f.type.startsWith('image/')){ const url=URL.createObjectURL(f); document.body.style.backgroundImage=`url(${url})`; document.body.style.backgroundSize='cover'; document.body.style.backgroundRepeat='no-repeat'; document.body.style.backgroundPosition='center center'; } }); }
